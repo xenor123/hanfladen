@@ -28,10 +28,10 @@ struct drug_struct
 {
 	char name[32];
 	int stock;
-	int Preis_Dealer;
-	int Preis_Verkauf;
-	int Beliebtheit;
-	int normal_price;
+	int price_dealer;
+	int price_sale;
+	int popularity;
+	int price_normal;
 };
 
 struct event_struct
@@ -66,7 +66,7 @@ char *drug_name[] =
 	"Crystal Meth"
 };
 
-int drug_normal_price[] =
+int drug_price_normal[] =
 {
 	10,
 	20,
@@ -162,7 +162,7 @@ int game()
 	{
 		strcpy(drug[i].name, drug_name[i]);
 		drug[i].stock = 0;
-		drug[i].normal_price = drug_normal_price[i];
+		drug[i].price_normal = drug_price_normal[i];
 	}
 	
 	for(i = 0; i < EVENT_COUNT; i++)
@@ -181,6 +181,8 @@ int game()
 	do 
 	{
 			event_today = show_event(day, event);
+						
+			
 			day++;
 	} while (1);
 }
@@ -206,7 +208,7 @@ int dealmenu(int *Geld, int Ereignis, int Tag, struct drug_struct *Droge)
 int auswahl_ort()
 {
 	int i;
-	int eingabe;
+	int input;
     
 	do
 	{
@@ -217,7 +219,7 @@ int auswahl_ort()
 		}
 		eingabe = input_number();
 		
-	} while((eingabe < 1) || (eingabe > LOCATION_COUNT));
+	} while((input < 1) || (input > LOCATION_COUNT));
 	
 	return eingabe;
 }
@@ -231,23 +233,6 @@ int show_event(int day, struct event_struct *event)
 	usleep(1000000);
 	return event_today;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
